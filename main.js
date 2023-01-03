@@ -52,7 +52,6 @@ async function createUsers(numberOfUsers) {
   };
 
   for (let i = 0; i < n; i++) {
-    customConfig.seed = i;
     const name = uniqueNamesGenerator(customConfig);
     const login = name.split(' ').join('.').toLowerCase();
     const email = login + '@example.com';
