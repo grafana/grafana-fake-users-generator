@@ -56,7 +56,7 @@ async function createUsers(numberOfUsers) {
     const name = uniqueNamesGenerator(customConfig);
     const login = name.split(' ').join('.').toLowerCase();
     const email = login + '@example.com';
-    console.log(name, login, email);
+    console.log(`${name.padEnd(24)}${login.padEnd(24)}${email}`);
 
     try {
       await client.post('/api/admin/users', {
