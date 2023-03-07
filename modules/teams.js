@@ -139,7 +139,7 @@ async function forAllTeams(handler, numberOfTasks = 10) {
       console.log("No teams to handle");
       return;
     } else {
-      console.log("Found " + res.totalCount + " teams to handle");
+      console.log(`Processing page ${i} of ${pages}`);
     }
     if (pages == 1) {
       pages = Math.ceil(res.totalCount / res.perPage);

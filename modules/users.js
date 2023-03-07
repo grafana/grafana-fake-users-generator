@@ -13,6 +13,26 @@ const customConfig = {
   style: "capital",
 };
 
+async function getUsers() {
+  const users = [];
+
+  const handler = (userId) => {
+    users.push(userId);
+  };
+  await forAllUsers(handler, 1);
+  return users;
+}
+
+async function getUsersCount() {
+  const client = getHTTPClient();
+  const response = await client.get(
+    `/api/users/search?perpage=${10}&page=${1}&query=gf_`
+  );
+
+  const res = response.data;
+  return res.totalCount;
+}
+
 async function createUser(client, idx = 1, debug = false) {
   const name = uniqueNamesGenerator(customConfig);
   const login = name.split(" ").join(".").toLowerCase() + idx;
@@ -132,7 +152,7 @@ async function forAllUsers(handler, numberOfTasks = 10) {
       console.log("No users to handle");
       return;
     } else {
-      console.log("Found " + res.totalCount + " users to handle");
+      console.log(`Processing page ${i} of ${pages}`);
     }
     if (pages == 1) {
       pages = Math.ceil(res.totalCount / res.perPage);
@@ -158,4 +178,6 @@ module.exports = {
   deleteUsers,
   forUsers,
   forAllUsers,
+  getUsers,
+  getUsersCount,
 };

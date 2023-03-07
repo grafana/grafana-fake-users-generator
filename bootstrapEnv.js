@@ -6,9 +6,9 @@ const {
 } = require("./modules/roleAssignments");
 const { createTeams, deleteTeams } = require("./modules/teams");
 const { addUsersToTeams } = require("./modules/teamUsers");
-const { createUsers, deleteUsers } = require("./modules/users");
+const { createUsers, deleteUsers, getUsersCount } = require("./modules/users");
 
-const USERS_NUM = 100;
+const USERS_NUM = 10000;
 const TEAMS_NUM = 100;
 const ROLES_PER_USER = 5;
 const ROLES_PER_TEAM = 10;
@@ -23,6 +23,12 @@ async function main() {
   if (args[0] == "delete") {
     await deleteUsers(DELETE_WORKERS_NUM);
     await deleteTeams(DELETE_WORKERS_NUM);
+    return;
+  }
+
+  const usersCount = await getUsersCount();
+  if (usersCount > 100) {
+    console.warn("Data already populated, skipping...");
     return;
   }
 
