@@ -2,6 +2,7 @@ const { getTeams } = require("./teams");
 const { forAllUsers } = require("./users");
 
 async function addUsersToTeams(teamsPerUser = 1, numberOfTasks = 10) {
+  console.log("adding users to teams");
   const teams = await getTeams();
 
   const userHandler = async (userId, client) => {
@@ -21,7 +22,6 @@ async function addUsersToTeams(teamsPerUser = 1, numberOfTasks = 10) {
           userId,
         });
       } catch (error) {
-        console.log(teamId, userId, userTeams);
         if (error.data) {
           console.warn(error.data);
         } else {

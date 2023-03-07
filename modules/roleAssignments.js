@@ -4,6 +4,7 @@ const { forAllTeams } = require("./teams");
 const { forAllUsers } = require("./users");
 
 async function assignFixedRolesToUsers(numberOfRoles = 5, numberOfTasks = 10) {
+  console.log("assigning roles to users");
   const client = getHTTPClient();
   const fixedRoles = await getFixedRoles(client);
   const rolesTotal = fixedRoles.length;
@@ -37,6 +38,7 @@ async function assignFixedRolesToUsers(numberOfRoles = 5, numberOfTasks = 10) {
 }
 
 async function assignFixedRolesToTeams(numberOfRoles = 5, numberOfTasks = 10) {
+  console.log("assigning roles to teams");
   const client = getHTTPClient();
   const fixedRoles = await getFixedRoles(client);
   const rolesTotal = fixedRoles.length;
