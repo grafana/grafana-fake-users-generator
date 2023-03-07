@@ -13,11 +13,14 @@ const customConfig = {
   style: "capital",
 };
 
-async function createUser(client) {
+async function createUser(client, idx = 1, debug = false) {
   const name = uniqueNamesGenerator(customConfig);
-  const login = name.split(" ").join(".").toLowerCase();
+  const login = name.split(" ").join(".").toLowerCase() + idx;
   const email = login + "@example.com";
-  console.log(`${name.padEnd(24)}${login.padEnd(24)}${email}`);
+
+  if (debug) {
+    console.log(`${name.padEnd(24)}${login.padEnd(24)}${email}`);
+  }
 
   try {
     await client.post("/api/admin/users", {
@@ -61,7 +64,7 @@ async function createUsers(numberOfUsers, numberOfTasks = 10) {
   const tasks = [];
   for (let i = 0; i < numberOfUsers; i++) {
     const task = async () => {
-      await createUser(client);
+      await createUser(client, i + 1);
     };
     tasks.push(task);
   }

@@ -13,9 +13,22 @@ const customConfig = {
   style: "lowerCase",
 };
 
-async function createTeam(client) {
-  const name = uniqueNamesGenerator(customConfig);
-  console.log(`${name.padEnd(24)}`);
+async function getTeams() {
+  const teams = [];
+
+  const handler = (teamId) => {
+    teams.push(teamId);
+  };
+  await forAllTeams(handler, 1);
+  return teams;
+}
+
+async function createTeam(client, idx, debug = false) {
+  const name = uniqueNamesGenerator(customConfig) + idx;
+
+  if (debug) {
+    console.log(`${name.padEnd(24)}`);
+  }
 
   try {
     await client.post("/api/teams", {
@@ -58,7 +71,7 @@ async function createTeams(numberOfTeams, numberOfTasks = 10) {
   const tasks = [];
   for (let i = 0; i < numberOfTeams; i++) {
     const task = async () => {
-      await createTeam(client);
+      await createTeam(client, i + 1);
     };
     tasks.push(task);
   }
@@ -146,6 +159,7 @@ async function forAllTeams(handler, numberOfTasks = 10) {
 }
 
 module.exports = {
+  getTeams,
   createTeam,
   deleteTeam,
   createTeams,
