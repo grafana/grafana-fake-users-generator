@@ -15,7 +15,7 @@ function getHTTPClient() {
   const config = getConfig();
 
   const clientConfig = {
-    baseURL: config.grafanaUrl || GRAFANA_URL,
+    baseURL: process.env.GRAFANA_URL || config.grafanaUrl || GRAFANA_URL,
     timeout: 5000,
     auth: {
       username: config.user || GRAFANA_USER,
