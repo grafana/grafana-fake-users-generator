@@ -8,7 +8,7 @@ const { createTeams, deleteTeams } = require("./modules/teams");
 const { addUsersToTeams } = require("./modules/teamUsers");
 const { createUsers, deleteUsers, getUsersCount } = require("./modules/users");
 
-const USERS_NUM = 10000;
+const USERS_NUM = 1000;
 const TEAMS_NUM = 100;
 const ROLES_PER_USER = 5;
 const ROLES_PER_TEAM = 10;
