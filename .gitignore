@@ -1,2 +1,5 @@
 config.json
+create_managed_permissions.sql
+delete_managed_permissions.sql
+
 node_modules
